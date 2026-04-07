@@ -1,0 +1,728 @@
+/* ═══════════════════════════════════════════════════════
+   Portfolio — VSCode-Style IDE Theme
+   Premium dark mode layout with IDE aesthetics
+   ═══════════════════════════════════════════════════════ */
+
+/* ─── Reset & Base ──────────────────────────────────── */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #1e1e2e;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+/* ─── Scrollbar  ────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #45475a;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #585b70;
+}
+
+/* ─── App Shell ─────────────────────────────────────── */
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.app-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ─── Header ────────────────────────────────────────── */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 36px;
+  padding: 0 12px;
+  user-select: none;
+  flex-shrink: 0;
+  z-index: 100;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.header-sidebar-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+.header-sidebar-toggle:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.header-menus {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.header-menu-wrapper {
+  position: relative;
+}
+
+.header-menu-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12.5px;
+  font-weight: 500;
+  transition: background 0.15s;
+}
+.header-menu-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.header-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  min-width: 200px;
+  border-radius: 8px;
+  padding: 4px;
+  z-index: 200;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.04);
+  animation: dropdownIn 0.15s ease-out;
+}
+
+@keyframes dropdownIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-size: 13px;
+  transition: background 0.12s;
+  text-align: left;
+}
+.header-dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.theme-swatch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.theme-check {
+  margin-left: auto;
+  opacity: 0.7;
+}
+
+.header-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.header-traffic-lights {
+  display: flex;
+  gap: 7px;
+}
+
+.traffic-light {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+.traffic-light:hover {
+  opacity: 1;
+}
+.traffic-red {
+  background: #ed6a5e;
+}
+.traffic-yellow {
+  background: #f5bf4f;
+}
+.traffic-green {
+  background: #61c554;
+}
+
+/* ─── Sidebar ───────────────────────────────────────── */
+.sidebar {
+  width: 240px;
+  min-width: 240px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  flex-shrink: 0;
+  animation: sidebarIn 0.2s ease-out;
+}
+
+@keyframes sidebarIn {
+  from {
+    width: 0;
+    min-width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 240px;
+    min-width: 240px;
+    opacity: 1;
+  }
+}
+
+.sidebar-header {
+  padding: 10px 16px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.sidebar-tree {
+  flex: 1;
+  overflow-y: auto;
+  padding: 4px 0;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding: 3px 12px;
+  font-size: 13px;
+  text-align: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+.sidebar-item:hover {
+  background: rgba(255, 255, 255, 0.04) !important;
+}
+
+.sidebar-file-active {
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+.sidebar-chevron {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.sidebar-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 12.5px;
+}
+
+/* ─── Editor Tabs ───────────────────────────────────── */
+.editor-tabs {
+  display: flex;
+  align-items: stretch;
+  height: 36px;
+  flex-shrink: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.editor-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 14px;
+  min-width: 120px;
+  max-width: 200px;
+  font-size: 12.5px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.1s, color 0.1s;
+  flex-shrink: 0;
+}
+.editor-tab:hover {
+  background: rgba(255, 255, 255, 0.04) !important;
+}
+
+.editor-tab-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 12px;
+}
+
+.editor-tab-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  margin-left: auto;
+  opacity: 0;
+  transition: opacity 0.15s, background 0.15s;
+}
+.editor-tab:hover .editor-tab-close {
+  opacity: 0.6;
+}
+.editor-tab-close:hover {
+  opacity: 1 !important;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ─── Editor Area ───────────────────────────────────── */
+.editor-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.editor-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* ─── Pages (shared) ────────────────────────────────── */
+.page {
+  display: flex;
+  min-height: 100%;
+  padding: 0;
+}
+
+.line-numbers {
+  display: flex;
+  flex-direction: column;
+  padding: 24px 8px 24px 16px;
+  text-align: right;
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 12px;
+  line-height: 1.8;
+  user-select: none;
+  flex-shrink: 0;
+  opacity: 0.4;
+  min-width: 48px;
+}
+
+.page-content {
+  flex: 1;
+  padding: 24px 32px 60px 20px;
+  max-width: 800px;
+  animation: fadeIn 0.25s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.code-comment {
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 13px;
+  line-height: 1.7;
+  margin-bottom: 24px;
+  white-space: pre;
+}
+
+/* ─── About Page ────────────────────────────────────── */
+.about-hero {
+  margin-bottom: 20px;
+}
+
+.about-name {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 6px;
+  font-family: 'Inter', sans-serif;
+}
+
+.about-degree {
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.about-school {
+  font-size: 13px;
+}
+
+.about-contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 16px 0;
+}
+
+.about-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  transition: opacity 0.2s;
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+}
+.about-link:hover {
+  opacity: 0.75;
+  text-decoration: underline;
+}
+
+.about-divider {
+  border: none;
+  border-top: 1px solid;
+  margin: 20px 0;
+  opacity: 0.5;
+}
+
+.section-heading {
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.skills-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding-left: 20px;
+}
+
+.skill-category {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.skill-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.skill-tag {
+  font-size: 12px;
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+  font-weight: 500;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.skill-tag:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* ─── Entry Pages (Experience / Project / Leadership) ─ */
+.entry-header {
+  margin-bottom: 16px;
+}
+
+.entry-title {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  font-family: 'Inter', sans-serif;
+}
+
+.entry-subtitle {
+  font-size: 17px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.entry-stack {
+  font-size: 13.5px;
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+  margin-bottom: 8px;
+}
+
+.entry-meta {
+  display: flex;
+  gap: 20px;
+  font-size: 12.5px;
+}
+.entry-meta span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.code-block {
+  padding: 16px 0 16px 20px;
+  margin: 8px 0 16px;
+  border-radius: 0 6px 6px 0;
+}
+
+.entry-bullets {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.entry-bullet {
+  font-size: 13.5px;
+  line-height: 1.6;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.bullet-marker {
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+  font-weight: 600;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.entry-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+/* ─── Welcome Page ──────────────────────────────────── */
+.welcome-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.welcome-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.welcome-icon {
+  opacity: 0.3;
+  margin-bottom: 8px;
+  animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(1.05); }
+}
+
+.welcome-title {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+.welcome-subtitle {
+  font-size: 15px;
+  margin-bottom: 12px;
+}
+
+.welcome-hint {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  opacity: 0.6;
+  margin-bottom: 20px;
+}
+
+.welcome-shortcuts {
+  display: flex;
+  gap: 16px;
+}
+
+.welcome-shortcut {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 16px;
+  border: 1px solid;
+  border-radius: 8px;
+  font-size: 12px;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+.welcome-shortcut:hover {
+  opacity: 0.8;
+}
+
+.shortcut-key {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+}
+
+/* ─── Status Bar ────────────────────────────────────── */
+.status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 24px;
+  padding: 0 12px;
+  font-size: 11.5px;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.status-bar-left,
+.status-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.status-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+/* ─── Responsive ────────────────────────────────────── */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 200px;
+    min-width: 200px;
+  }
+
+  @keyframes sidebarIn {
+    from {
+      width: 0;
+      min-width: 0;
+      opacity: 0;
+    }
+    to {
+      width: 200px;
+      min-width: 200px;
+      opacity: 1;
+    }
+  }
+
+  .header-center {
+    display: none;
+  }
+
+  .welcome-shortcuts {
+    flex-direction: column;
+  }
+
+  .page-content {
+    padding: 16px 16px 40px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    width: 180px;
+    min-width: 180px;
+  }
+
+  .about-contact {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .entry-meta {
+    flex-direction: column;
+    gap: 4px;
+  }
+}
