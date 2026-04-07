@@ -9,10 +9,11 @@ import {
   PanelLeftClose,
   PanelLeftOpen,
   Check,
+  Terminal,
 } from 'lucide-react';
 
 export default function Header() {
-  const { theme, themeId, setTheme, sidebarCollapsed, toggleSidebar } = useApp();
+  const { theme, themeId, setTheme, sidebarCollapsed, toggleSidebar, terminalOpen, toggleTerminal } = useApp();
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -111,6 +112,17 @@ export default function Header() {
               </div>
             )}
           </div>
+          
+          {/* Terminal Toggle Button */}
+          <button 
+            className="header-menu-btn" 
+            style={{ color: terminalOpen ? theme.colors.accent : theme.colors.textSecondary }}
+            onClick={toggleTerminal}
+            title={terminalOpen ? 'Close terminal' : 'Open terminal'}
+          >
+            <Terminal size={14} />
+            Terminal
+          </button>
         </div>
       </div>
 

@@ -8,11 +8,13 @@ interface AppState {
   themeId: ThemeId;
   theme: Theme;
   sidebarCollapsed: boolean;
+  terminalOpen: boolean;
   openFile: (id: string, name: string, icon: string) => void;
   closeTab: (id: string) => void;
   setActiveTab: (id: string) => void;
   setTheme: (id: ThemeId) => void;
   toggleSidebar: () => void;
+  toggleTerminal: () => void;
 }
 
 const AppContext = createContext<AppState | null>(null);
@@ -24,6 +26,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [activeTabId, setActiveTabId] = useState<string | null>('about');
   const [themeId, setThemeId] = useState<ThemeId>('dark-default');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [terminalOpen, setTerminalOpen] = useState(false);
 
   const theme = themes[themeId];
 
@@ -61,6 +64,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const toggleSidebar = useCallback(() => {
     setSidebarCollapsed((prev) => !prev);
   }, []);
+  const toggleTerminal = useCallback(() => {
+    setTerminalOpen((prev) => !prev);
+  }, []);
 
   return React.createElement(
     AppContext.Provider,
@@ -76,6 +82,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
         setActiveTab,
         setTheme,
         toggleSidebar,
+        terminalOpen,
+        toggleTerminal,
       },
     },
     children,
