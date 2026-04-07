@@ -55,6 +55,13 @@ export const about = {
     data: ['PostgreSQL', 'MySQL', 'SQLite', 'Pandas', 'NumPy', 'PyTorch', 'TensorFlow', 'BeautifulSoup'],
     devTools: ['CI/CD', 'Git', 'Docker', 'VS Code', 'Linear', 'Jira', 'Figma', 'Figma Make', 'Cursor', 'Claude Code', 'GitHub Actions'],
   },
+  topTracks: [
+    { title: 'A Cold Play', artist: 'The Kid LAROI' },
+    { title: 'Silk and Cologne', artist: 'Ei8ht and Offset' },
+    { title: 'TMU', artist: 'Don Toliver' },
+    { title: 'The Color Violet', artist: 'Tory Lanez' },
+    { title: 'Si Antes Te Hubiera Conocido', artist: 'KAROL G' },
+  ],
 };
 
 // ─── Experience ─────────────────────────────────────

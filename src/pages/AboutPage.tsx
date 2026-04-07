@@ -13,6 +13,7 @@ import {
   Globe,
 } from 'lucide-react';
 import LeetCodeTerminal from '../components/LeetCodeTerminal';
+import SpotifyTerminal from '../components/SpotifyTerminal';
 
 export default function AboutPage() {
   const { theme } = useApp();
@@ -123,7 +124,7 @@ export default function AboutPage() {
 
           <div className="about-widgets">
             <LeetCodeTerminal />
-            {/* Spotify Integration placeholder */}
+            <SpotifyTerminal />
           </div>
         </div>
       </div>
