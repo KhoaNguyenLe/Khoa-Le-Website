@@ -42,6 +42,13 @@ export function getFileIcon(icon?: string, size = 16): React.ReactNode {
           <text x="12" y="16.5" textAnchor="middle" fontSize="8" fontWeight="bold" fill="#fff" fontFamily="monospace">{'</>'}</text>
         </svg>
       );
+    case 'leetcode':
+      return (
+        <svg style={s} viewBox="0 0 24 24" fill="none">
+          <path d="M16.105 18.567l.474.79-.355.214-.474-.79a1.185 1.185 0 01-1.025.568H5.987a1.185 1.185 0 01-1.025-.568l-.474.79-.355-.214.474-.79a1.185 1.185 0 01-.157-1.185l2.4-7.11a1.185 1.185 0 011.125-.806h6.053a1.185 1.185 0 011.125.806l2.4 7.11a1.185 1.185 0 01-.157 1.185z" fill="#ffa116" />
+          <path d="M12 12.5h-2.5v2.5H12v-2.5z" fill="#fff" />
+        </svg>
+      );
     case 'folder':
       return (
         <svg style={s} viewBox="0 0 24 24" fill="none">

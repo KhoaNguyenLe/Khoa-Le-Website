@@ -14,6 +14,7 @@ export default function StatusBar() {
     if (name.endsWith('.java')) return 'Java';
     if (name.endsWith('.html')) return 'HTML';
     if (name.endsWith('.js')) return 'JavaScript';
+    if (name.endsWith('.json')) return 'JSON';
     return 'Plain Text';
   };
 

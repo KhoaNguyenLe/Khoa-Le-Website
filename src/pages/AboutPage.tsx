@@ -12,6 +12,7 @@ import {
   Wrench,
   Globe,
 } from 'lucide-react';
+import LeetCodeTerminal from '../components/LeetCodeTerminal';
 
 export default function AboutPage() {
   const { theme } = useApp();
@@ -96,29 +97,35 @@ export default function AboutPage() {
           <span style={{ color: c.text }}> = {'{'}</span>
         </h2>
 
-        <div className="skills-grid">
-          {skillCategories.map((cat) => (
-            <div key={cat.label} className="skill-category">
-              <h3 className="skill-label" style={{ color: cat.color }}>
-                {cat.icon}
-                {cat.label}
-              </h3>
-              <div className="skill-tags">
-                {cat.items.map((s) => (
-                  <span
-                    key={s}
-                    className="skill-tag"
-                    style={{ background: c.tag, color: c.tagText }}
-                  >
-                    {s}
-                  </span>
-                ))}
+        <div className="about-grid-container">
+          <div className="skills-grid">
+            {skillCategories.map((cat) => (
+              <div key={cat.label} className="skill-category">
+                <h3 className="skill-label" style={{ color: cat.color }}>
+                  {cat.icon}
+                  {cat.label}
+                </h3>
+                <div className="skill-tags">
+                  {cat.items.map((s) => (
+                    <span
+                      key={s}
+                      className="skill-tag"
+                      style={{ background: c.tag, color: c.tagText }}
+                    >
+                      {s}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+            <p style={{ color: c.text, marginTop: 8 }}>{'};'}</p>
+          </div>
 
-        <p style={{ color: c.text, marginTop: 8 }}>{'};'}</p>
+          <div className="about-widgets">
+            <LeetCodeTerminal />
+            {/* Spotify Integration placeholder */}
+          </div>
+        </div>
       </div>
     </div>
   );
