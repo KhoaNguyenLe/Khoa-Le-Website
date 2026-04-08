@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useApp } from '../context/AppContext';
+import { about } from '../data/resume';
 import TerminalWidget from './TerminalWidget';
-import { Loader2, AlertCircle } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 
 interface LeetCodeStats {
   totalSolved: number;
@@ -14,11 +15,13 @@ export default function LeetCodeTerminal() {
   const { theme } = useApp();
   const [stats, setStats] = useState<LeetCodeStats | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const c = theme.colors;
 
   useEffect(() => {
-    fetch('https://leetcode-stats-api.herokuapp.com/khoanguyenle')
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 3000);
+
+    fetch('https://leetcode-stats-api.herokuapp.com/khoanguyenle', { signal: controller.signal })
       .then((res) => res.json())
       .then((data) => {
         if (data.status === 'success') {
@@ -28,33 +31,34 @@ export default function LeetCodeTerminal() {
             mediumSolved: data.mediumSolved,
             hardSolved: data.hardSolved,
           });
-        } else {
-          setError(data.message || 'Failed to fetch stats');
         }
       })
       .catch((err) => {
-        console.error(err);
-        setError('Network error');
+        if (err.name === 'AbortError') {
+          console.warn('LeetCode API timed out after 3s. Using fallback data.');
+        } else {
+          console.error('LeetCode API Fetch Error:', err);
+        }
       })
-      .finally(() => setLoading(false));
+      .finally(() => {
+        clearTimeout(timeoutId);
+        setLoading(false);
+      });
+
+    return () => {
+      clearTimeout(timeoutId);
+      controller.abort();
+    };
   }, []);
 
-  if (loading) {
+  // Use hardcoded backup if stats are null
+  const displayStats = stats || about.leetcodeStats;
+
+  if (loading && !stats) {
     return (
       <TerminalWidget title="leetcode — zsh">
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 120 }}>
           <Loader2 className="animate-spin" size={24} color={c.textMuted} />
-        </div>
-      </TerminalWidget>
-    );
-  }
-
-  if (error || !stats) {
-    return (
-      <TerminalWidget title="leetcode — zsh">
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 120, flexDirection: 'column', gap: 12 }}>
-          <AlertCircle size={24} color={c.variable} />
-          <span style={{ fontSize: 12, color: c.textMuted }}>{error || 'Error loading stats'}</span>
         </div>
       </TerminalWidget>
     );
@@ -83,19 +87,19 @@ export default function LeetCodeTerminal() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: 6, flex: 1 }}>
           <div style={{ fontSize: 13, color: c.text, fontWeight: 600, display: 'flex', justifyContent: 'space-between' }}>
             <span>total solved:</span>
-            <span style={{ color: c.accent }}>{stats.totalSolved}</span>
+            <span style={{ color: c.accent }}>{displayStats.totalSolved}</span>
           </div>
           <div style={{ fontSize: 13, color: '#00b8a3', fontWeight: 500, display: 'flex', justifyContent: 'space-between' }}>
             <span>easy:</span>
-            <span>{stats.easySolved}</span>
+            <span>{displayStats.easySolved}</span>
           </div>
           <div style={{ fontSize: 13, color: '#ffc01e', fontWeight: 500, display: 'flex', justifyContent: 'space-between' }}>
             <span>medium:</span>
-            <span>{stats.mediumSolved}</span>
+            <span>{displayStats.mediumSolved}</span>
           </div>
           <div style={{ fontSize: 13, color: '#ff375f', fontWeight: 500, display: 'flex', justifyContent: 'space-between' }}>
             <span>hard:</span>
-            <span>{stats.hardSolved}</span>
+            <span>{displayStats.hardSolved}</span>
           </div>
         </div>
       </div>

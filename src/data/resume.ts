@@ -62,6 +62,12 @@ export const about = {
     { title: 'The Color Violet', artist: 'Tory Lanez' },
     { title: 'Si Antes Te Hubiera Conocido', artist: 'KAROL G' },
   ],
+  leetcodeStats: {
+    totalSolved: 21,
+    easySolved: 9,
+    mediumSolved: 11,
+    hardSolved: 1,
+  },
 };
 
 // ─── Experience ─────────────────────────────────────
