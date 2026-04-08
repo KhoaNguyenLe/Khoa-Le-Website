@@ -70,18 +70,24 @@ export default function LeetCodeTerminal() {
         <div 
           className="leetcode-logo-container" 
           style={{ 
-            backgroundColor: 'rgba(255, 255, 255, 0.05)', 
-            padding: 16, 
-            borderRadius: 12,
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center'
+            justifyContent: 'center',
+            width: 72,
+            height: 72,
+            flexShrink: 0
           }}
         >
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M13.483 0a1.374 1.374 0 00-.961.438L7.04 6.274c-.273.285-.403.625-.403.961 0 .336.13.676.403.961l.006.006.007.007 3.39 3.518a1.374 1.374 0 001.966 0 1.374 1.374 0 000-1.966L10.5 7.412h8.04l.006.006.007.007 3.39 3.518a1.374 1.374 0 001.966 0 1.374 1.374 0 000-1.966l-5.485-5.698A1.374 1.374 0 0013.483 0z" fill="#B3B3B3"/>
-            <path d="M13.483 24a1.374 1.374 0 01-.961-.438L.437 11.834a1.374 1.374 0 010-1.966l5.485-5.698a1.374 1.374 0 012.083.155 1.374 1.374 0 01-.155 2.083l-4.524 4.498 10.155 10.603h8.04l-.006-.006-.007-.007-3.39-3.518a1.374 1.374 0 010-1.966 1.374 1.374 0 011.966 0 1.374 1.374 0 010 1.966l5.483 5.698A1.374 1.374 0 0122.539 24h-9.056z" fill="#FFA116"/>
-          </svg>
+          <img 
+            src="/leetcode.png" 
+            alt="LeetCode Logo" 
+            style={{ 
+              width: '100%', 
+              height: '100%', 
+              objectFit: 'contain',
+              animation: 'fadeIn 0.5s ease-out'
+            }} 
+          />
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 6, flex: 1 }}>

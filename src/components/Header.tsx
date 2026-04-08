@@ -132,13 +132,7 @@ export default function Header() {
         </span>
       </div>
 
-      <div className="header-right">
-        <div className="header-traffic-lights">
-          <span className="traffic-light traffic-red" />
-          <span className="traffic-light traffic-yellow" />
-          <span className="traffic-light traffic-green" />
-        </div>
-      </div>
+      <div className="header-right" />
     </header>
   );
 }
